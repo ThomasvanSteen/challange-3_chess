@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <title>SocketChess - Home</title>
+  </head>
+
+  <body>
+    <div class="half centered-table centered">
+      <h1>Chess</h1>
+      <h2>Create a new room</h2>
+      <form method="get" id="formMulti" action="/chess">
+        <h3>Choose a Username</h3>
+        <input type="text" name="userName" id="userName" minlength="3" placeholder="Username" autocomplete="off" required/>
+        <br />
+        <h3>Choose a Room Name, if you want to create a new one</h3>
+        <input type="text" name="roomName" id="roomName" minlength="3" required autocomplete="off" placeholder="Room Name"/>
+        <div class="tab centered-table">
+          <button class="tablinks half centered" onclick="switchTab(event, 'multiplayerTab')" id="multiplayerTabButton"><h3>Multiplayer</h3></button>
+          <!-- <button class="tablinks half centered" onclick="switchTab(event, 'singleplayerTab')" id="singleplayerTabButton"><h3>Singleplayer</h3></button> -->
+        </div>
+        <div id="multiplayerTab" class="tabcontent centered-table">
+            <button id="createRoomButton" onclick="createRoom('multi')" class="submit">
+              Create room
+            </button>
+        </div>
+        
+        <div id="singleplayerTab" class="tabcontent centered-table">
+            <h3>Choose an Algorithm</h3>
+            <select name="algorithm" id="Algorithm" onchange="updateSingleplayerOptions()">
+              <option value="random" selected>Random</option>
+              <option value="negamax">Negamax</option>
+              <option value="negamax_a_b">Negamax-Alpha-Beta</option>
+              <option value="negamax_a_b_table">Negamax-Alpha-Beta Table</option>
+              <option value="negamax_a_b_quiescent">Negamax-Alpha-Beta Quiescent</option>
+              <option value="iterative_deepening">Iterative deepening</option>
+              <option value="iterative_deepening_table">Iterative deepening with Table</option>
+              <option value="iterative_deepening_order">Iterative deepening with Ordering</option>
+            </select>
+            <br />
+            <div id="depthDiv" hidden>
+              <h3>Choose a Depth</h3>
+              <input type="number" name="depth" id="Depth" min="0" max="10" autocomplete="off" placeholder="Depth"/>
+              <br />
+            </div>
+            <div id="timeDiv" hidden>
+              <h3>Choose a Time (ms)</h3>
+              <input type="number" name="time" id="Time" min="1" max="10000" autocomplete="off" placeholder="Time (ms)"/>
+            </div>
+            <button id="createRoomButton" onclick="createRoom('single')" class="submit">
+              Create room
+            </button>
+        </div>
+        <h3>Choose room type</h3>
+        <select name="roomType" id="roomType">
+          <option value="singleplayer">Singleplayer</option>
+          <option value="multiplayer">Multiplayer</option>
+
+        </select>
+      </form>
+        
+        
+      <h2>Or join one that already exists</h2>
+      <table id="roomTable" class="centered-table">
+        <tr>
+          <th>Room name</th>
+          <th>White</th>
+          <th>Black</th>
+          <th>Spectators</th>
+          <th></th>
+        </tr>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <footer class="footer">
+    </footer>
+  </body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/scripts/index.js"></script>
+  <script src="/scripts/tabs.js"></script>
+  <script>
+    // Get the element with id="defaultOpen" and click on it
+    console.log('opening multiplayer tab');
+    document.getElementById("multiplayerTabButton").click();
+  </script>
+</html>

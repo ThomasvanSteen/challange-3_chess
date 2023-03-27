@@ -1,0 +1,19 @@
+{
+  "name": "challange-3_chess",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@chrisoakman/chessboardjs": "^1.0.0",
+    "chess.js": "^1.0.0-beta.3",
+    "express": "^4.18.2",
+    "jQuery": "^1.7.4"
+  }
+}
